@@ -1,113 +1,83 @@
-import Image from 'next/image'
+import HomeTemplate from '@/components/templates/HomeTemplate'
 
 export default function Home() {
+  const artists = [
+    {
+      imageUrl: 'https://www.washingtonpost.com/rf/image_960w/2010-2019/Wires/Images/2018-08-17/AP/Photo_Gallery_Aretha_Franklin_39183.jpg-266aa.jpg',
+      artistName: 'Aretha Franklin',
+      description: 'Aretha Louise Franklin was an American singer, songwriter, actress, pianist, and civil rights activist. Franklin began her career as a child singing gospel at New Bethel Baptist Church in Detroit, Michigan, where her father C. L. Franklin was a minister.',
+      instrument: 'Vocals',
+      activeYears: '1952-2017',
+      },
+      {
+      imageUrl: 'https://www.washingtonpost.com/rf/image_960w/2010-2019/Wires/Images/2018-08-17/AP/Photo_Gallery_Aretha_Franklin_39183.jpg-266aa.jpg', // Replace this with the image URL of the next artist
+      artistName: 'Ella Fitzgerald',
+      description: 'Ella Fitzgerald, also known as the "First Lady of Song" and "Queen of Jazz," was an American jazz vocalist with a career spanning six decades. She was renowned for her incredible vocal range, improvisational ability, and scat singing.',
+      instrument: 'Vocals',
+      activeYears: '1934-1993',
+      },
+      {
+      imageUrl: 'https://www.washingtonpost.com/rf/image_960w/2010-2019/Wires/Images/2018-08-17/AP/Photo_Gallery_Aretha_Franklin_39183.jpg-266aa.jpg', // Replace this with the image URL of the next artist
+      artistName: 'Billie Holiday',
+      description: 'Billie Holiday, born Eleanora Fagan, was an American jazz and blues singer known for her distinctive voice and emotional depth. Her vocal style influenced generations of musicians and remains iconic in the history of jazz.',
+      instrument: 'Vocals',
+      activeYears: '1933-1959',
+      },
+      {
+      imageUrl: 'https://www.washingtonpost.com/rf/image_960w/2010-2019/Wires/Images/2018-08-17/AP/Photo_Gallery_Aretha_Franklin_39183.jpg-266aa.jpg', // Replace this with the image URL of the next artist
+      artistName: 'Nina Simone',
+      description: 'Nina Simone, born Eunice Kathleen Waymon, was an American singer, songwriter, and pianist. She was an influential figure in jazz, blues, and civil rights activism, and her music often addressed the social and racial issues of her time.',
+      instrument: 'Vocals, Piano',
+      activeYears: '1954-2003',
+      },
+      {
+      imageUrl: 'https://www.washingtonpost.com/rf/image_960w/2010-2019/Wires/Images/2018-08-17/AP/Photo_Gallery_Aretha_Franklin_39183.jpg-266aa.jpg', // Replace this with the image URL of the next artist
+      artistName: 'Sarah Vaughan',
+      description: 'Sarah Vaughan, known as the "Divine One," was an American jazz singer with a rich and velvety voice. She was admired for her vocal control, improvisational skills, and extensive range, making her one of the most accomplished jazz vocalists in history.',
+      instrument: 'Vocals',
+      activeYears: '1942-1990',
+      },
+      {
+      imageUrl: 'https://www.washingtonpost.com/rf/image_960w/2010-2019/Wires/Images/2018-08-17/AP/Photo_Gallery_Aretha_Franklin_39183.jpg-266aa.jpg', // Replace this with the image URL of the next artist
+      artistName: 'Dinah Washington',
+      description: 'Dinah Washington, born Ruth Lee Jones, was an American jazz and blues singer. With her powerful voice and emotional delivery, she earned the nickname "Queen of the Blues." Her career encompassed various styles, including jazz, R&B, and traditional pop.',
+      instrument: 'Vocals',
+      activeYears: '1943-1963',
+      },
+      {
+      imageUrl: 'https://www.washingtonpost.com/rf/image_960w/2010-2019/Wires/Images/2018-08-17/AP/Photo_Gallery_Aretha_Franklin_39183.jpg-266aa.jpg', // Replace this with the image URL of the next artist
+      artistName: 'Carmen McRae',
+      description: 'Carmen McRae was an American jazz singer, composer, and pianist. Known for her distinctive phrasing and expressive vocals, she had a successful career that spanned several decades, leaving a lasting impact on the jazz world.',
+      instrument: 'Vocals, Piano',
+      activeYears: '1944-1991',
+      },
+      {
+      imageUrl: 'https://www.washingtonpost.com/rf/image_960w/2010-2019/Wires/Images/2018-08-17/AP/Photo_Gallery_Aretha_Franklin_39183.jpg-266aa.jpg', // Replace this with the image URL of the next artist
+      artistName: 'Anita ODay',
+      description: 'Anita ODay was an American jazz singer and one of the leading female vocalists of the swing era. With her impeccable timing and inventive vocal style, she became known for her collaborations with big bands and small jazz groups.',
+      instrument: 'Vocals',
+      activeYears: '1939-2006',
+      },
+      {
+      imageUrl: 'https://www.washingtonpost.com/rf/image_960w/2010-2019/Wires/Images/2018-08-17/AP/Photo_Gallery_Aretha_Franklin_39183.jpg-266aa.jpg', // Replace this with the image URL of the next artist
+      artistName: 'Lena Horne',
+      description: 'Lena Horne was an American singer, actress, and civil rights activist. She achieved fame as a jazz and pop vocalist and became one of the first African-American performers to be widely accepted in the entertainment industry.',
+      instrument: 'Vocals',
+      activeYears: '1933-2000',
+      },
+      {
+      imageUrl: 'https://www.washingtonpost.com/rf/image_960w/2010-2019/Wires/Images/2018-08-17/AP/Photo_Gallery_Aretha_Franklin_39183.jpg-266aa.jpg', // Replace this with the image URL of the next artist
+      artistName: 'Melody Gardot',
+      description: 'Melody Gardot is an American jazz singer, songwriter, and musician. Known for her soulful voice and heartfelt performances, she has garnered critical acclaim for her modern approach to jazz music.',
+      instrument: 'Vocals, Guitar',
+      activeYears: '2005-present',
+      },
+  ];
+
+  const instruments = ['Guitar', 'Bass', 'Drums', 'Vocals', 'Keyboard'];
+
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    <HomeTemplate artists={artists} instruments={instruments}/>
   )
 }
