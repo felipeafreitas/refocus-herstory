@@ -13,7 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import Image from 'next/image';
 import { Button } from '../ui/button';
 import {
   Sheet,
@@ -26,21 +25,31 @@ import {
   SheetTrigger,
 } from '../ui/sheet';
 import { Separator } from '../ui/separator';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Badge } from '../ui/badge';
+import ChevronRight from '../ui/ChevronRight';
+import { Artist } from '@/app/page';
 
 type HomeTemplateProps = {
-  artists: {
-    imageUrl: string;
-    artistName: string;
-    description: string;
-    instrument: string;
-    activeYears: string;
-  }[];
+  artists: Artist[];
   instruments: string[];
 };
 
 const HomeTemplate = ({artists, instruments}: HomeTemplateProps) => {
   const [slider, setSlider] = React.useState([1900, 2000]);
+  const [selectedInstruments, setSelectedInstruments] = React.useState(
+    instruments
+  );
+
+  const filteredArtists = artists.filter((artist: Artist) => {
+    return (
+      artist.activeYears.from >= slider[0] &&
+      artist.activeYears.to <= slider[1] &&
+      artist.instrument.some((instrument: string) =>
+        selectedInstruments.includes(instrument)
+      )
+    );
+  });
 
   return (
     <>
@@ -55,44 +64,69 @@ const HomeTemplate = ({artists, instruments}: HomeTemplateProps) => {
           sickest hidden treasures!
         </p>
       </div>
-      <div className='flex flex-col gap-4'>
-        <div className='flex flex-row justify-between w-full'>
-          <span>{slider[0]}</span>
-          <span>{slider[1]}</span>
-        </div>
-        <Slider defaultValue={slider} onValueChange={(v) => setSlider(v)} min={1900} max={2000}/>
-        <div>
+      <div className='flex flex-col gap-4 w-10/12 items-center mt-6'>
+        <Slider
+          defaultValue={slider}
+          onValueChange={(v) => setSlider(v)}
+          min={1900}
+          max={2000}
+          thumbOne={slider[0]}
+          thumbTwo={slider[1]}
+        />
+        <div className='flex gap-2'>
           {instruments.map((instrument) => (
-            <Toggle key={instrument}>{instrument}</Toggle>
+            <Toggle defaultPressed={true} key={instrument} onClick={
+              () => setSelectedInstruments(
+                (state) => state.includes(instrument)
+                  ? state.filter(i => i !== instrument)
+                  : [...state, instrument]
+              )
+            }>
+              {instrument}
+            </Toggle>
           ))}
         </div>
       </div>
       <Separator className='my-10' />
-      <div className='flex flex-col gap-3 w-full'>
-        {artists.map(({activeYears, description, artistName, imageUrl, instrument}) => (
-          <Card key={artistName} className='p-4'>
-            <CardHeader>
-              <CardTitle>{artistName}</CardTitle>
-              <CardDescription>{activeYears}</CardDescription>
+      <div className='flex flex-row gap-3 w-full flex-wrap items-center justify-center'>
+        {filteredArtists.map(({activeYears, description, artistName, imageUrl, instrument}) => (
+          <Card key={artistName} className='p-4 max-w-[430px]'>
+            <CardHeader className='flex flex-row justify-between'>
+            <img
+              src={imageUrl}
+              alt=''
+              className='rounded-full object-cover w-[100px] h-[100px]'
+              width={100}
+              height={100}
+            />
+              <div className='text-right flex flex-col justify-between'>
+                <CardTitle>{artistName}</CardTitle>
+                <CardDescription>{`Aktive Zeit: ${activeYears.from} -  ${activeYears.to}`}</CardDescription>
+              </div>
             </CardHeader>
             <CardContent className='flex items-center gap-5'>
-              <img
-                src={imageUrl}
-                alt=''
-                className='rounded-full object-cover'
-                width={200}
-              />
-              <div>
-                <ul>
-                  <li>{instrument}</li>
-                  <li>{description}</li>
-                </ul>
+              <div className='flex flex-col gap-4'>
+                <div className='flex flex-row gap-1'>
+                  {instrument.map((instrument) => (
+                    <Badge key={instrument} variant='outline'>{instrument}</Badge>
+                  ))}
+                </div>
+                <iframe
+                  className="border-radius:12px"
+                  src="https://open.spotify.com/embed/track/2XNNxHozxIxvJ6gUnjWjt3?utm_source=generator&theme=0"
+                  width="100%"
+                  height="152"
+                  frameBorder="0"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen;picture-in-picture"
+                  loading="lazy"
+                />
+                <p className='text-ellipsis max-h-max[40px] line-clamp-3'>{description}</p>
               </div>
             </CardContent>
-            <CardFooter>
+            <CardFooter className='flex flex-row-reverse'>
               <Sheet key={'right'}>
                 <SheetTrigger asChild>
-                  <Button variant='outline'>See more</Button>
+                  <Button variant='outline'>MEHR <ChevronRight /></Button>
                 </SheetTrigger>
                 <SheetContent side={'right'}>
                   <SheetHeader>
