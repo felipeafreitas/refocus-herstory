@@ -29,6 +29,7 @@ import { Badge } from '../ui/badge';
 import ChevronRight from '../ui/ChevronRight';
 import React from 'react';
 import Note from '../ui/Note';
+import Logo from '../ui/Logo';
 
 type HomeTemplateProps = {
   artists: Artist[];
@@ -65,19 +66,13 @@ const HomeTemplate = ({ artists }: HomeTemplateProps) => {
     );
   });
 
-  console.log(artists)
-
   return (
     <>
-      <div className='flex flex-col gap-2 mb-12 justify-center items-center'>
-        <div className='flex justify-center items-center'>
-          <div className='flex flex-col text-left items-center'>
-            <h1 className='text-4xl	font-bold text-[#F66048]'>RefocusHerstory</h1>
-            <h2 className='text-xs	'>INSTRUMENTALISTINNEN DES 20. JAHRHUNDERTS</h2>
-          </div>
-          <Note />
+      <div className='flex flex-col gap-10 mb-12 justify-center items-center w-10/12'>
+        <div className='flex justify-center items-center w-full sm:w-[354px]'>
+          <Logo />
         </div>
-        <div className='w-10/12'>
+        <div>
           <h2 className='text-2xl font-semibold	'>About the project</h2>
           <p>
             Welcome to "Hidden Jazz Gems: Unveiling Underrated Divas!" Discover
@@ -98,7 +93,7 @@ const HomeTemplate = ({ artists }: HomeTemplateProps) => {
           thumbOne={slider[0]}
           thumbTwo={slider[1]}
         />
-        <div className='flex gap-2'>
+        <div className='flex gap-2 flex-wrap'>
           {instruments.length > 0 && instruments.map((instrument) => (
             <Toggle defaultPressed={true} key={instrument} onClick={
               () => setSelectedInstruments(
@@ -188,7 +183,7 @@ const HomeTemplate = ({ artists }: HomeTemplateProps) => {
                       <div>{artist?.['Bands / Formations']}</div>
                     </div>
                   </SheetDescription>
-                  <SheetFooter className='px-6'>
+                  <SheetFooter className='p-6'>
                     <SheetClose asChild>
                       <Button type='submit'>Close</Button>
                     </SheetClose>
