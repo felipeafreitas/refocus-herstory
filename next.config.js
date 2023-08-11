@@ -4,9 +4,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'washingtonpost.com',
+        hostname: 'refocusherstory.com',
         port: '',
-        // pathname: '/account123/**',
       },
     ],
   },

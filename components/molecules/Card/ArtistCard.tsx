@@ -34,7 +34,7 @@ function ArtistCard({ artist }: ArtistCardProps) {
     <CardHeader className='flex flex-row justify-between'>
     <img
       src={artist['Picture Link']}
-      alt=''
+      alt={`${artist?.['First Name']} ${artist?.['Surname']}`}
       className='rounded-full object-cover w-[100px] h-[100px]'
       width={100}
       height={100}
@@ -70,7 +70,7 @@ function ArtistCard({ artist }: ArtistCardProps) {
         <SheetContent side={'right'} className="overflow-y-auto sm:max-w-[50%]">
           <SheetHeader className='mb-4'>
             <img
-              src="https://v5.airtableusercontent.com/v1/19/19/1691762400000/a2qRKSxoU6IpGG8pWKX9sw/Kw0_9PLSq--63KaBoEz72eLx9TBmM_W7YKfpmTOuvuU2EPuZxIIR-FSvzJsD2AnZtOb6qz19mwTnNCmZyAR4MuYNt2gxgBHLt_iHoCIJqyw/H-FHP-8JdJLLoxiZq3ZlMK7R5AmzAysVrXnI--ocZEk"
+              src={artist['Picture Link']}
               alt={`${artist?.['First Name']} ${artist?.['Surname']}`}
               className='object-cover max-h-[50vh]'
               width={'100%'}

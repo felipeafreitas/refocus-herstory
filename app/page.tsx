@@ -16,8 +16,6 @@ async function getArtists() {
 export default async function Home() {
   const artists = await getArtists()
 
-  console.log(artists[0]['Picture'][0]['url'])
-
   return (
     <HomeTemplate artists={artists} />
   )
