@@ -67,7 +67,7 @@ function ArtistCard({ artist }: ArtistCardProps) {
         <SheetTrigger asChild>
           <Button variant='outline'>MEHR <ChevronRight /></Button>
         </SheetTrigger>
-        <SheetContent side={'right'} className="overflow-y-auto sm:max-w-[50%]">
+        <SheetContent side={'right'} className="overflow-y-auto">
           <SheetHeader className='mb-4'>
             <img
               src={artist['Picture Link']}

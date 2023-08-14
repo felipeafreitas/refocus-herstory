@@ -2,7 +2,7 @@ import HomeTemplate from '@/components/templates/HomeTemplate/HomeTemplate'
 
 async function getArtists() {
   return fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_NAME}`, {
-    cache: 'no-cache',
+    next: { revalidate: 3600 },
     method: 'GET',
     headers: new Headers({
       Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}`
