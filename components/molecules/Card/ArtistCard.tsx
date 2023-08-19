@@ -22,10 +22,10 @@ import {
 
 import { Badge } from '../../ui/badge';
 import ChevronRight from '../../ui/ChevronRight';
-import { Artist } from '@/lib/types';
+import { ParsedArtist } from '@/lib/types';
 
 type ArtistCardProps = {
-  artist: Artist;
+  artist: ParsedArtist;
 };
 
 function ArtistCard({ artist }: ArtistCardProps) {
@@ -51,26 +51,38 @@ function ArtistCard({ artist }: ArtistCardProps) {
             <Badge key={instrument} variant='outline'>{instrument}</Badge>
           ))}
         </div>
-        <iframe
+        {artist?.['Spotify Link'] ? (<iframe
           className="border-radius:12px"
-          src={artist?.['Spotify Link']}
+          src={artist?.['Spotify Link'].includes('embed')
+            ? artist?.['Spotify Link']
+            : `${new URL(artist?.['Spotify Link']).origin}/embed/${new URL(artist?.['Spotify Link']).pathname}`
+          }
           width="100%"
           height="152"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen;picture-in-picture"
           loading="lazy"
-        />
-        <p className='text-ellipsis max-h-max[40px] line-clamp-3'>{artist?.['Description']}</p>
+        />) : artist?.['Youtube Link'] ? <iframe
+          width="100%"
+          height="152"
+          src={artist?.['Youtube Link'].includes('embed')
+            ? artist?.['Spotify Link']
+            : `https://www.youtube.com/embed/${new URL(artist?.['Youtube Link']).searchParams.get('v')}`
+          }
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        /> : null}
+        {artist?.['Description'] && <p className='text-ellipsis max-h-max[40px] line-clamp-3'>{artist?.['Description']}</p>}
       </div>
     </CardContent>
     <CardFooter className='flex flex-row-reverse'>
       <Sheet key={'right'}>
         <SheetTrigger asChild>
-          <Button variant='outline'>MEHR <ChevronRight /></Button>
+          <Button variant='outline' className='border-0 text-white bg-[#F66048] hover:bg-[#c34b39] hover:text-white'>MEHR <ChevronRight /></Button>
         </SheetTrigger>
         <SheetContent side={'right'} className="overflow-y-auto">
           <SheetHeader className='mb-4'>
             <img
-              src={artist['Picture Link']}
+              src={artist?.['Picture Link'] || 'https://placehold.co/600x400'}
               alt={`${artist?.['First Name']} ${artist?.['Surname']}`}
               className='object-cover max-h-[50vh]'
               width={'100%'}
@@ -92,19 +104,29 @@ function ArtistCard({ artist }: ArtistCardProps) {
               <div>{`Geboren am: ${artist?.['Date of Birth']}`}</div>
               <div>{`Gestorben am: ${artist?.['Date of Death']}`}</div>
             </div>
-            <p className='text-black'>{artist['Description']}</p>
-            <div className='text-black'>
-              <h2 className='text-xl font-bold'>Publikationen / Alben</h2>
-              <div>{artist?.['Publications / Albums']}</div>
-            </div>
-            <div className='text-black'>
-              <h2 className='text-xl	font-bold'>Bands / Formationen</h2>
-              <div>{artist?.['Bands / Formations']}</div>
-            </div>
+            {artist?.['Description'] && <p className='text-black'>{artist['Description']}</p>}
+            {artist?.['Publications / Albums'] && (
+              <div className='text-black'>
+                <h2 className='text-xl font-bold'>Publikationen / Alben</h2>
+                <div>{artist?.['Publications / Albums']}</div>
+              </div>
+            )}
+            {artist?.['Bands / Formations'] && (
+              <div className='text-black'>
+                <h2 className='text-xl	font-bold'>Bands / Formationen</h2>
+                {artist?.['Bands / Formations']}
+              </div>
+            )}
+            {artist?.['Sources'] && (
+              <div className='text-black [&>p>a]:text-[#F66048]'>
+                <h2 className='text-xl	font-bold'>Sources</h2>
+                {artist?.['Sources']}
+              </div>
+            )}
           </SheetDescription>
           <SheetFooter className='p-6'>
             <SheetClose asChild>
-              <Button type='submit'>Close</Button>
+              <Button type='submit' className='border-0 text-white bg-[#F66048] hover:bg-[#c34b39] hover:text-white'>Close</Button>
             </SheetClose>
           </SheetFooter>
         </SheetContent>
