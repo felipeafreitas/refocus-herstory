@@ -7,10 +7,10 @@ import React from 'react';
 import Header from '@/components/molecules/Header/Header';
 import Filter from '@/components/molecules/Filter/Filter';
 import ArtistCard from '@/components/molecules/Card';
-import { Artist } from '@/lib/types';
+import { ParsedArtist } from '@/lib/types';
 
 type HomeTemplateProps = {
-  artists: Artist[];
+  artists: ParsedArtist[];
 };
 
 const HomeTemplate = ({ artists }: HomeTemplateProps) => {
@@ -19,7 +19,7 @@ const HomeTemplate = ({ artists }: HomeTemplateProps) => {
   const [slider, setSlider] = React.useState([1900, new Date().getFullYear()]);
   const [selectedInstruments, setSelectedInstruments] = React.useState(instruments);
 
-  const filteredArtists = artists.filter((artist: Artist) => {
+  const filteredArtists = artists.filter((artist: ParsedArtist) => {
     return (
       artist['First Appearance'] >= slider[0] &&
       artist['Last Appearance'] <= slider[1] &&
