@@ -23,6 +23,7 @@ import {
 import { Badge } from '../../ui/badge';
 import ChevronRight from '../../ui/ChevronRight';
 import { ParsedArtist } from '@/lib/types';
+import EmbeddedMedia from './EmbeddedMedia/EmbeddedMedia';
 
 type ArtistCardProps = {
   artist: ParsedArtist;
@@ -51,26 +52,7 @@ function ArtistCard({ artist }: ArtistCardProps) {
             <Badge key={instrument} variant='outline'>{instrument}</Badge>
           ))}
         </div>
-        {artist?.['Spotify Link'] ? (<iframe
-          className="border-radius:12px"
-          src={artist?.['Spotify Link'].includes('embed')
-            ? artist?.['Spotify Link']
-            : `${new URL(artist?.['Spotify Link']).origin}/embed/${new URL(artist?.['Spotify Link']).pathname}`
-          }
-          width="100%"
-          height="152"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen;picture-in-picture"
-          loading="lazy"
-        />) : artist?.['Youtube Link'] ? <iframe
-          width="100%"
-          height="152"
-          src={artist?.['Youtube Link'].includes('embed')
-            ? artist?.['Spotify Link']
-            : `https://www.youtube.com/embed/${new URL(artist?.['Youtube Link']).searchParams.get('v')}`
-          }
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        /> : null}
+        <EmbeddedMedia url={artist?.['Media Link']} />
         {artist?.['Description'] && <p className='text-ellipsis max-h-max[40px] line-clamp-3'>{artist?.['Description']}</p>}
       </div>
     </CardContent>

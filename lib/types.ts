@@ -13,8 +13,7 @@ export interface Artist {
   'Sources': string;
   'First Appearance': number;
   'Last Appearance': number;
-  'Spotify Link': string;
-  'Youtube Link': string;
+  'Media Link': string;
 }
 
 export interface ParsedArtist {
@@ -30,6 +29,5 @@ export interface ParsedArtist {
   'Sources': ReactElement | undefined;
   'First Appearance': number;
   'Last Appearance': number;
-  'Spotify Link': string;
-  'Youtube Link': string;
+  'Media Link': string;
 }
