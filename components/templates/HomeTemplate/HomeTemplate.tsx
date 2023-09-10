@@ -2,21 +2,23 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 'use client';
 
-import { Separator } from '../../ui/separator';
 import React from 'react';
-import Header from '@/components/molecules/Header/Header';
-import Filter from '@/components/molecules/Filter/Filter';
-import ArtistCard from '@/components/molecules/Card';
-import { ParsedArtist } from '@/lib/types';
+import { Header, Filter, ArtistCard } from '@/components/molecules';
+import { ParsedArtist } from '@/types';
+import { initialYear, lastYear } from '@/constants';
+import { Separator } from '@/components/ui/separator';
 
 type HomeTemplateProps = {
   artists: ParsedArtist[];
+  content: { [key:string]: string }[]
 };
 
-const HomeTemplate = ({ artists }: HomeTemplateProps) => {
-  const instruments = Array.from(new Set(artists.map(artist => artist['Instrument']).filter(Boolean).flat()));
+export const HomeTemplate = ({ artists, content }: HomeTemplateProps) => {
+  const instruments = Array.from(
+    new Set(artists.map(artist => artist['Instrument']).filter(Boolean).flat())
+  );
 
-  const [slider, setSlider] = React.useState([1900, new Date().getFullYear()]);
+  const [slider, setSlider] = React.useState([initialYear, lastYear]);
   const [selectedInstruments, setSelectedInstruments] = React.useState(instruments);
 
   const filteredArtists = artists.filter((artist: ParsedArtist) => {
@@ -31,7 +33,7 @@ const HomeTemplate = ({ artists }: HomeTemplateProps) => {
 
   return (
     <>
-      <Header />
+      <Header content={content}/>
       <Filter
         instruments={instruments}
         slider={slider}
@@ -50,5 +52,3 @@ const HomeTemplate = ({ artists }: HomeTemplateProps) => {
     </>
   );
 };
-
-export default HomeTemplate;

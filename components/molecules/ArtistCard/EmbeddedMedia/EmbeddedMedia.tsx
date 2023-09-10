@@ -22,6 +22,7 @@ const EmbeddedMedia = ({ url }: EmbeddedMediaProps) => {
   if (urlObject.origin.includes('youtu')) return (
     <iframe
       width="100%"
+      className="rounded-xl	"
       height="152"
       src={url.includes('embed')
         ? url

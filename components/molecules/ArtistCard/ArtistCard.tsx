@@ -1,35 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Button } from '../../ui/button';
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '../../ui/sheet';
 
-import { Badge } from '../../ui/badge';
-import ChevronRight from '../../ui/ChevronRight';
-import { ParsedArtist } from '@/lib/types';
-import EmbeddedMedia from './EmbeddedMedia/EmbeddedMedia';
+import { ParsedArtist } from '@/types';
+import EmbeddedMedia from './EmbeddedMedia';
+import { Badge } from '@/components/ui/badge';
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
+import { ChevronRight } from '@/components/ui/ChevronRight';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 
 type ArtistCardProps = {
   artist: ParsedArtist;
 };
 
-function ArtistCard({ artist }: ArtistCardProps) {
+export function ArtistCard({ artist }: ArtistCardProps) {
   return (
     <Card className='p-4 max-w-[430px]'>
     <CardHeader className='flex flex-row justify-between'>
@@ -59,7 +43,9 @@ function ArtistCard({ artist }: ArtistCardProps) {
     <CardFooter className='flex flex-row-reverse'>
       <Sheet key={'right'}>
         <SheetTrigger asChild>
-          <Button variant='outline' className='border-0 text-white bg-[#F66048] hover:bg-[#c34b39] hover:text-white'>MEHR <ChevronRight /></Button>
+          <Button variant='outline' className='border-0 text-white bg-[#F66048] hover:bg-[#c34b39] hover:text-white'>
+            MEHR <ChevronRight />
+          </Button>
         </SheetTrigger>
         <SheetContent side={'right'} className="overflow-y-auto">
           <SheetHeader className='mb-4'>
@@ -117,5 +103,3 @@ function ArtistCard({ artist }: ArtistCardProps) {
   </Card>
   )
 }
-
-export default ArtistCard

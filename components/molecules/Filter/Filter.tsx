@@ -1,5 +1,6 @@
-import { Slider } from "@/components/ui/slider"
-import { Toggle } from "@/components/ui/toggle"
+import { Slider } from "@/components/ui/slider";
+import { Toggle } from "@/components/ui/toggle";
+import { initialYear, lastYear } from "@/constants";
 
 type FilterProps = {
   instruments: string[];
@@ -8,15 +9,15 @@ type FilterProps = {
   setSelectedInstruments: React.Dispatch<React.SetStateAction<string[]>>
 }
 
-function Filter({ instruments, slider, setSlider, setSelectedInstruments }: FilterProps) {
+export function Filter({ instruments, slider, setSlider, setSelectedInstruments }: FilterProps) {
 
   return (
     <div className='flex flex-col gap-6 w-10/12 items-center mt-6'>
         <Slider
           defaultValue={slider}
           onValueChange={(v) => setSlider(v)}
-          min={1900}
-          max={new Date().getFullYear()}
+          min={initialYear}
+          max={lastYear}
           thumbOne={slider[0]}
           thumbTwo={slider[1]}
         />
@@ -36,5 +37,3 @@ function Filter({ instruments, slider, setSlider, setSelectedInstruments }: Filt
       </div>
   )
 }
-
-export default Filter
