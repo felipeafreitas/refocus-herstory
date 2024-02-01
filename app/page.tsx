@@ -1,4 +1,3 @@
-/* eslint-disable react/no-children-prop */
 import { Artist, ParsedArtist } from '@/types';
 import { HomeTemplate } from '@/components/templates'
 import { getContent } from '@/services';
@@ -8,6 +7,7 @@ import remarkGfm from 'remark-gfm';
 export default async function Home() {
   const content = await getContent<{ [key:string]: string }>('Content')
   const artists = await getContent<Artist>('Artists')
+
   let parsedArtists: ParsedArtist[] = []
   artists.forEach((artist) => {
     parsedArtists.push(
@@ -32,7 +32,6 @@ export default async function Home() {
     }
     return 0;
   })
-
 
   return (
     <HomeTemplate artists={orderedArtists} content={content} />

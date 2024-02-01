@@ -21,15 +21,13 @@ export const HomeTemplate = ({ artists, content }: HomeTemplateProps) => {
   const [slider, setSlider] = React.useState([initialYear, lastYear]);
   const [selectedInstruments, setSelectedInstruments] = React.useState(instruments);
 
-  const filteredArtists = artists.filter((artist: ParsedArtist) => {
-    return (
-      artist['First Appearance'] >= slider[0] &&
-      artist['Last Appearance'] <= slider[1] &&
-      artist['Instrument'].some((instrument: string) =>
-        selectedInstruments.includes(instrument)
-      )
-    );
-  });
+  const filteredArtists = artists.filter((artist: ParsedArtist) =>
+    artist['First Appearance'] >= slider[0] &&
+    artist['Last Appearance'] <= slider[1] &&
+    artist['Instrument'].some((instrument: string) =>
+      selectedInstruments.includes(instrument)
+    )
+  );
 
   return (
     <>

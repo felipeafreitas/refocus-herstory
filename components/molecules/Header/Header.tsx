@@ -18,7 +18,7 @@ export function Header({ content }: HeaderProps) {
       />
       </div>
       <div>
-        <h2 className='text-2xl font-semibold	'>About the project</h2>
+        <h2 className='text-2xl font-semibold	'>Über das Projekt</h2>
         <p>{about}</p>
       </div>
     </div>

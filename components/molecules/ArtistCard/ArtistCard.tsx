@@ -18,7 +18,7 @@ export function ArtistCard({ artist }: ArtistCardProps) {
     <Card className='p-4 max-w-[430px]'>
     <CardHeader className='flex flex-row justify-between'>
     <img
-      src={artist['Picture Link']}
+      src={artist['Picture Link'] || 'https://placehold.co/100x100'}
       alt={`${artist?.['First Name']} ${artist?.['Surname']}`}
       className='rounded-full object-cover w-[100px] h-[100px]'
       width={100}
@@ -36,7 +36,7 @@ export function ArtistCard({ artist }: ArtistCardProps) {
             <Badge key={instrument} variant='outline'>{instrument}</Badge>
           ))}
         </div>
-        <EmbeddedMedia url={artist?.['Media Link']} />
+        {artist?.['Media Link'] && <EmbeddedMedia url={artist?.['Media Link']} />}
         {artist?.['Description'] && <p className='text-ellipsis max-h-max[40px] line-clamp-3'>{artist?.['Description']}</p>}
       </div>
     </CardContent>
