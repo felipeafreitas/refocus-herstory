@@ -8,22 +8,25 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHe
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from '@/components/ui/ChevronRight';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import { formatDate } from '@/lib/utils';
 
 type ArtistCardProps = {
   artist: ParsedArtist;
 };
 
 export function ArtistCard({ artist }: ArtistCardProps) {
+  console.log(new Date(artist['Date of Birth']).toLocaleDateString('de-DE'))
+
   return (
     <Card className='p-4 max-w-[430px]'>
     <CardHeader className='flex flex-row justify-between'>
-    <img
-      src={artist['Picture Link'] || 'https://placehold.co/100x100'}
+    {artist?.['Picture Link'] && <img
+      src={artist['Picture Link']}
       alt={`${artist?.['First Name']} ${artist?.['Surname']}`}
       className='rounded-full object-cover w-[100px] h-[100px]'
       width={100}
       height={100}
-    />
+    />}
       <div className='text-right flex flex-col justify-between'>
         <CardTitle>{`${artist?.['First Name']} ${artist?.['Surname']}`}</CardTitle>
         <CardDescription>{`Aktive Zeit: ${artist?.['First Appearance']} -  ${artist?.['Last Appearance']}`}</CardDescription>
@@ -69,8 +72,8 @@ export function ArtistCard({ artist }: ArtistCardProps) {
               ))}
             </div>
             <div className=''>
-              <div>{`Geboren am: ${artist?.['Date of Birth']}`}</div>
-              <div>{`Gestorben am: ${artist?.['Date of Death']}`}</div>
+              {artist?.['Date of Birth'] && <div>{`Geboren am: ${formatDate(artist['Date of Birth'])}`}</div>}
+              {artist?.['Date of Death'] && <div>{`Gestorben am: ${formatDate(artist['Date of Death'])}`}</div>}
             </div>
             {artist?.['Description'] && <p className='text-black'>{artist['Description']}</p>}
             {artist?.['Publications / Albums'] && (
@@ -87,14 +90,14 @@ export function ArtistCard({ artist }: ArtistCardProps) {
             )}
             {artist?.['Sources'] && (
               <div className='text-black [&>p>a]:text-[#F66048]'>
-                <h2 className='text-xl	font-bold'>Sources</h2>
+                <h2 className='text-xl	font-bold'>Quellen</h2>
                 {artist?.['Sources']}
               </div>
             )}
           </SheetDescription>
           <SheetFooter className='p-6'>
             <SheetClose asChild>
-              <Button type='submit' className='border-0 text-white bg-[#F66048] hover:bg-[#c34b39] hover:text-white'>Close</Button>
+              <Button type='submit' className='border-0 text-white bg-[#F66048] hover:bg-[#c34b39] hover:text-white'>Schließen</Button>
             </SheetClose>
           </SheetFooter>
         </SheetContent>

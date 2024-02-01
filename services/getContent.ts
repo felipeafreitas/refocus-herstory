@@ -10,5 +10,5 @@ export async function getContent<C>(table: Table): Promise<C[]> {
   })
     .then(res => res.json())
     .then(res => res.records)
-    .then(res => res.map((record: { fields: any; }) => record.fields))
+    .then(res => res?.map((record: { fields: any; }) => record.fields) || [])
 };
